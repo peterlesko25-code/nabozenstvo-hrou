@@ -2,6 +2,8 @@
 
 Rozšíriteľná webová knižnica interaktívnych hier pre katechézu. Prvý prototyp obsahuje jedno textové pexeso k evanjeliovému príbehu o utíšení búrky.
 
+Obsah prvej hry je pracovný návrh, nie je označený ako odborne schválený.
+
 ## Spustenie
 
 Vyžaduje Node.js 20.9 alebo novší.
