@@ -48,10 +48,13 @@ export default function Home() {
           {games.map((game, index) => (
             <article className="game-card" key={game.slug}>
               <Link href={`/play/${game.slug}`} className="game-card-link" aria-label={`Otvoriť hru: ${game.title}`}>
-                <div className={`game-art game-art-${index + 1}`} aria-hidden="true">
-                  <span className="art-moon">◔</span><span className="art-wave wave-a" /><span className="art-wave wave-b" />
-                  <span className="art-boat">⛵</span><span className="art-star">✦</span>
-                  <span className="art-index">01</span>
+                <div className={`game-art game-art-${index + 1}${game.type === "quiz" ? " quiz-art" : ""}`} aria-hidden="true">
+                  {game.type === "memory" ? (
+                    <><span className="art-moon">◔</span><span className="art-wave wave-a" /><span className="art-wave wave-b" /><span className="art-boat">⛵</span><span className="art-star">✦</span></>
+                  ) : (
+                    <div className="quiz-art-symbol"><span>?</span><i>✦</i></div>
+                  )}
+                  <span className="art-index">{String(index + 1).padStart(2, "0")}</span>
                 </div>
                 <div className="game-card-body">
                   <div className="card-topline"><span>{game.topic}</span><span>{game.ageRange.min}–{game.ageRange.max} ROKOV</span></div>
