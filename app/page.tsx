@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { StoryArt } from "@/components/story-art";
 import { games } from "@/lib/games";
 
 export default function Home() {
@@ -9,7 +10,7 @@ export default function Home() {
           <span className="brand-mark" aria-hidden="true">✦</span>
           <span className="brand-name">katechéza<span>hrou</span></span>
         </Link>
-        <div className="nav-note"><span className="status-dot" /> Malá knižnica, ktorá bude rásť</div>
+        <div className="nav-note"><span className="status-dot" /> Spolu hráme. Spolu objavujeme.</div>
       </nav>
 
       <section className="hero">
@@ -20,11 +21,8 @@ export default function Home() {
           <a href="#knižnica" className="primary-button">Pozrieť hry <span aria-hidden="true">↓</span></a>
         </div>
         <div className="hero-art" aria-hidden="true">
-          <div className="sun-glow" />
-          <div className="hero-orbit orbit-one" />
-          <div className="hero-orbit orbit-two" />
-          <div className="hero-symbol">✦</div>
-          <div className="hero-caption">HRA · ROZHOVOR · OBJAVENIE</div>
+          <StoryArt />
+          <div className="hero-caption">Malé objavy. Veľké príbehy.</div>
         </div>
         <div className="hero-bottomline"><span>PRE KATECHÉZU A RODINY</span><span>PRVÁ UKÁŽKA JE PRIPRAVENÁ</span></div>
       </section>
@@ -49,18 +47,14 @@ export default function Home() {
             <article className="game-card" key={game.slug}>
               <Link href={`/play/${game.slug}`} className="game-card-link" aria-label={`Otvoriť hru: ${game.title}`}>
                 <div className={`game-art game-art-${index + 1}${game.type === "quiz" ? " quiz-art" : ""}`} aria-hidden="true">
-                  {game.type === "memory" ? (
-                    <><span className="art-moon">◔</span><span className="art-wave wave-a" /><span className="art-wave wave-b" /><span className="art-boat">⛵</span><span className="art-star">✦</span></>
-                  ) : (
-                    <div className="quiz-art-symbol"><span>?</span><i>✦</i></div>
-                  )}
-                  <span className="art-index">{String(index + 1).padStart(2, "0")}</span>
+                  <StoryArt variant={game.type === "memory" ? "lake" : "book"} />
+                  <span className="art-badge">{game.type === "memory" ? "Nájdi dvojice" : "Objav odpovede"}</span>
                 </div>
                 <div className="game-card-body">
                   <div className="card-topline"><span>{game.topic}</span><span>{game.ageRange.min}–{game.ageRange.max} ROKOV</span></div>
                   <h3>{game.title}</h3>
                   <p>{game.description}</p>
-                  <div className="card-bottomline"><span>{game.subtitle}</span><span className="card-arrow" aria-hidden="true">↗</span></div>
+                  <div className="card-bottomline"><span>{game.subtitle}</span><span className="card-arrow">Hrať <span aria-hidden="true">→</span></span></div>
                 </div>
               </Link>
             </article>

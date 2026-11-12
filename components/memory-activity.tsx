@@ -1,5 +1,6 @@
 "use client";
 
+import { BoatMark } from "@/components/story-art";
 import { useEffect, useRef, useState } from "react";
 import type { MemoryGameDefinition, MemoryPair } from "@/lib/game-types";
 
@@ -106,14 +107,14 @@ export function MemoryActivity({ game }: { game: MemoryGameDefinition }) {
             >
               {isVisible ? (
                 <span className="card-face-content">
-                  <span className="card-kind">{card.side === "concept" ? "POJEM" : "VYSVETLENIE"}</span>
+                  <span className="card-kind">{isMatched && <span aria-hidden="true">✓ </span>}{card.side === "concept" ? "POJEM" : "VYSVETLENIE"}</span>
                   <span className="card-text">{card.text}</span>
                   {isMatched && card.side === "explanation" && game.pairs.find((pair) => pair.id === card.pairId)?.teachingNote && (
                     <span className="card-note">Tip pre rozhovor: {game.pairs.find((pair) => pair.id === card.pairId)?.teachingNote}</span>
                   )}
                 </span>
               ) : (
-                <span className="card-back" aria-hidden="true"><span>✦</span></span>
+                <span className="card-back" aria-hidden="true"><BoatMark /><span className="card-number">{index + 1}</span></span>
               )}
             </button>
           );
