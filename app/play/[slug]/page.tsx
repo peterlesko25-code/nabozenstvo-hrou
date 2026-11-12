@@ -31,7 +31,7 @@ export default async function PlayPage({ params }: { params: Promise<{ slug: str
         </div>
 
         <div className="learning-goal"><span className="goal-icon" aria-hidden="true">✦</span><p><strong>Čo si pripomenieme</strong>{game.learningGoal}</p></div>
-        {game.type === "memory" ? <MemoryActivity game={game} /> : <QuizActivity game={game} />}
+        {game.type === "memory" ? <MemoryActivity game={game} /> : <QuizActivity key={game.slug} game={game} />}
       </div>
       <footer className="play-footer">Hráme, aby sme lepšie porozumeli. <span>✦</span></footer>
     </main>
