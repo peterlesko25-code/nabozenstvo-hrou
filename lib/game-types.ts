@@ -1,4 +1,4 @@
-export type GameType = "memory";
+export type GameType = "memory" | "quiz";
 export type ReviewStatus = "draft" | "reviewed";
 
 export interface MemoryPair {
@@ -27,4 +27,18 @@ export interface MemoryGameDefinition extends BaseGameDefinition {
   pairs: MemoryPair[];
 }
 
-export type GameDefinition = MemoryGameDefinition;
+export interface QuizQuestion {
+  id: string;
+  prompt: string;
+  choices: string[];
+  correctAnswerIndex: number;
+  explanation: string;
+  teachingNote?: string;
+}
+
+export interface QuizGameDefinition extends BaseGameDefinition {
+  type: "quiz";
+  questions: QuizQuestion[];
+}
+
+export type GameDefinition = MemoryGameDefinition | QuizGameDefinition;
