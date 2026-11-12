@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MemoryActivity } from "@/components/memory-activity";
+import { QuizActivity } from "@/components/quiz-activity";
 import { getGameBySlug } from "@/lib/games";
 
 export default async function PlayPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -23,14 +24,14 @@ export default async function PlayPage({ params }: { params: Promise<{ slug: str
           <p>{game.description}</p>
           <div className="game-meta-row">
             <span>◷ {game.estimatedMinutes} min</span>
-            <span>✧ {game.pairs.length} dvojíc</span>
+            <span>✧ {game.type === "memory" ? `${game.pairs.length} dvojíc` : `${game.questions.length} otázky`}</span>
             <span>Zdroj: {game.sources.join(", ")}</span>
           </div>
           {game.reviewStatus === "draft" && <p className="review-note" role="note">Pracovný návrh obsahu — pred použitím skontrolovať.</p>}
         </div>
 
         <div className="learning-goal"><span className="goal-icon" aria-hidden="true">✦</span><p><strong>Čo si pripomenieme</strong>{game.learningGoal}</p></div>
-        <MemoryActivity game={game} />
+        {game.type === "memory" ? <MemoryActivity game={game} /> : <QuizActivity game={game} />}
       </div>
       <footer className="play-footer">Hráme, aby sme lepšie porozumeli. <span>✦</span></footer>
     </main>
